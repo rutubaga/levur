@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEVUR — дверь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@300;400;500&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+  :root{--bg:#fff;--ink:#111;--mute:#9A9A9A;--line:rgba(0,0,0,.09);--card:#F4F4F4;--g2:#E9E9E9}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:400 14px/1.4 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:radial-gradient(circle,rgba(0,0,0,.13) 1px,transparent 1.2px);background-size:22px 22px}
+  .page{max-width:1180px;margin:0 auto;padding:28px 28px 80px}
+
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+  .logo{font:400 clamp(64px,10vw,150px)/.86 Anton,Impact,sans-serif;letter-spacing:-.005em}
+  .meta{font-size:12px;color:var(--mute);text-align:right;padding-top:8px}
+  .meta b{display:block;color:var(--ink);font-weight:400}
+  .lead{margin:22px 0 64px;max-width:340px;font-size:13px}
+  .lead .k{color:var(--mute)}
+
+  .sec{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--line)}
+  .sec>*{min-width:0}
+  .note{grid-column:1/-1;font-size:12px;color:var(--mute);margin-top:4px}
+  .sec h2{font-size:12px;font-weight:400;color:var(--mute)}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .card{background:var(--card);border-radius:18px;padding:20px;box-shadow:inset 0 0 0 1px var(--line)}
+  .card.dark{background:var(--ink);color:#fff}
+  .price{font:400 44px/1 Anton,Impact,sans-serif;margin-bottom:14px}
+  .card p{font-size:13px}
+  .card ul{list-style:none;margin-top:14px;font-size:13px}
+  .card li{padding:7px 0;border-top:1px solid rgba(255,255,255,.14)}
+  .card .k{color:var(--mute)}
+  .pay{font-size:22px;letter-spacing:.01em;margin-top:4px;font-variant-numeric:tabular-nums}
+  .sub{display:block;margin-top:4px;font-size:12px;color:var(--mute)}
+  .card.dark .sub{color:rgba(255,255,255,.55)}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .step{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:99px;padding:6px 18px 6px 6px;box-shadow:inset 0 0 0 1px var(--line)}
+  .step i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:normal 12px "Inter Tight"}
+  .step div{padding-top:2px;font-size:13px;line-height:1.25}
+  .step span{display:block;color:var(--mute);font-size:12px}
+
+  .qs{list-style:none;counter-reset:q;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .qs li{counter-increment:q;background:var(--card);border-radius:18px;padding:16px 18px;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;line-height:1.35}
+  .qs li:before{content:counter(q,decimal-leading-zero);display:block;color:var(--mute);font-size:12px;margin-bottom:6px}
+  .qs .opt{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .qs .opt span{padding:5px 12px;border-radius:99px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);font-size:12px}
+
+  @media (max-width:820px){
+    .page{padding:20px 16px 60px}
+    .sec{grid-template-columns:1fr;gap:14px}
+    .cards,.steps,.qs{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo">LEVUR<br>ДВЕРЬ</div>
+    <div class="meta"><b>Входная группа</b>Октябрь 2026</div>
+  </header>
+  <p class="lead"><span class="k">Задача —</span> наклейка на стекло входной двери 81 × 200 см к открытию: ЧБ-фото с жёлтым акцентом.</p>
+
+  <section class="sec">
+    <h2>Стоимость</h2>
+    <div class="cards">
+      <div class="card dark">
+        <div class="price">10 000 ₽</div>
+        <p>2 концепции на выбор</p>
+        <ul>
+          <li>Фото: подбор или создание</li>
+          <li>Примерка на фото фасада</li>
+          <li>2 круга правок, если понадобятся<span class="sub">Меняем текст, фото, цвет, расположение — идея остаётся</span></li>
+          <li>Макет в печать 81 × 200</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="price">+5 000 ₽</div>
+        <p>Каждая дополнительная концепция</p>
+        <p class="sub">Третья на выбор или новая идея вместо уже выбранной</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Оплата</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="price">100%</div>
+        <p>Предоплата</p>
+      </div>
+      <div class="card">
+        <p class="sub" style="margin:0">По номеру телефона в Т-Банк</p>
+        <p class="pay">+7 930 799-06-56</p>
+        <p>Алиса С.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Срок</h2>
+    <div class="steps">
+      <div class="step"><i>пн</i><div>Ответы на вопросы<span>26 октября</span></div></div>
+      <div class="step"><i>ср</i><div>2 концепции<span>28 октября</span></div></div>
+      <div class="step"><i>+2</i><div>Правки, макет в печать<span>2 дня после выбора</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Вопросы</h2>
+    <ol class="qs">
+      <li>Подача громкая, как афиша, или сдержанная, как фирменный стиль?</li>
+      <li>Фото — живой репортаж со вспышкой или тёплое, как кадр из кино?</li>
+    </ol>
+  </section>
+
+</div>
+</body>
+</html>
