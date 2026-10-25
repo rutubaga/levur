@@ -44,7 +44,7 @@
   .step div{padding-top:2px;font-size:13px;line-height:1.25}
   .step span{display:block;color:var(--mute);font-size:12px}
 
-  .qs{list-style:none;counter-reset:q;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .qs{list-style:none;counter-reset:q;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   .qs li{counter-increment:q;background:var(--card);border-radius:18px;padding:16px 18px;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;line-height:1.35}
   .qs li:before{content:counter(q,decimal-leading-zero);display:block;color:var(--mute);font-size:12px;margin-bottom:6px}
   .qs .opt{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -112,10 +112,11 @@
   </section>
 
   <section class="sec">
-    <h2>Вопросы</h2>
+    <h2>Нужно от вас</h2>
     <ol class="qs">
       <li>Подача громкая, как афиша, или сдержанная, как фирменный стиль?</li>
       <li>В каком формате передать макет типографии?</li>
+      <li>Пришлите, пожалуйста, шрифты из брендбука</li>
     </ol>
   </section>
 
