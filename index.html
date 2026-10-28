@@ -58,6 +58,7 @@
   .swb{width:28px;height:28px;padding:3px;border:0;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1px var(--line);cursor:pointer}
   .swb span{display:block;width:100%;height:100%;border-radius:50%}
   .swb[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
+  .swatches[hidden]{display:none}
   .cname{color:var(--mute);font-size:12px;margin-left:4px;min-width:62px}
   .opts{display:inline-flex;flex-wrap:wrap;padding:3px;gap:3px;border-radius:99px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
   .opts button{font:400 13px/1 "Inter Tight",system-ui,sans-serif;color:var(--ink);padding:8px 12px;border:0;border-radius:99px;background:transparent;cursor:pointer}
@@ -177,7 +178,7 @@
           <div class="plate">
             <div class="ly" data-depth="0.35">
               <img class="leaf" src="door-3d/door.webp" alt="">
-              <img class="sticker" id="k2" src="door-3d/sticker-poster-serif-dark.webp?v=20261028e" alt="Постер «Ждём вас» с фото в форме замочной скважины на стекле двери LEVUR">
+              <img class="sticker" id="k2" src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" alt="Постер «Ждём вас» с фото в форме замочной скважины на стекле двери LEVUR">
               <div class="sheen"></div>
             </div>
             <div class="ly" data-depth="1">
@@ -189,7 +190,7 @@
           </div>
           <div class="shade"></div>
         </div></div>
-        <figcaption>Вариант 2<span class="opts" role="group" aria-label="Вариант постера"><button type="button" data-img="k2" data-src="door-3d/sticker-poster-serif-dark.webp?v=20261028e" aria-pressed="true">Антиква, чёрный</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-grotesk.webp?v=20261028g" aria-pressed="false">Гротеск</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-serif.webp?v=20261028e" aria-pressed="false">Антиква</button></span></figcaption>
+        <figcaption>Вариант 2<span class="opts" role="group" aria-label="Вариант постера"><button type="button" id="k2dark" data-img="k2" data-src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" aria-pressed="true">Антиква, чёрный</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-grotesk.webp?v=20261028g" aria-pressed="false">Гротеск</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-serif.webp?v=20261028e" aria-pressed="false">Антиква</button></span><span class="swatches" id="k2sw" role="group" aria-label="Цвет фона"><button type="button" class="swb" data-k2="black" data-src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" aria-pressed="true" title="Чёрный" aria-label="Чёрный"><span style="background:#262728"></span></button><button type="button" class="swb" data-k2="green" data-src="door-3d/sticker-poster-serif-dark-green.webp?v=20261028h" aria-pressed="false" title="Оливковый" aria-label="Оливковый"><span style="background:#4d5a32"></span></button><button type="button" class="swb" data-k2="wine" data-src="door-3d/sticker-poster-serif-dark-wine.webp?v=20261028h" aria-pressed="false" title="Винный" aria-label="Винный"><span style="background:#7a2e36"></span></button><span class="cname">Чёрный</span></span></figcaption>
       </figure>
     </div>
   </section>
@@ -295,7 +296,7 @@
 
   // plate colour per variant, LEVUR logo on variant 2
   const stickers = [...document.querySelectorAll('.sticker')];
-  const colorBtns = [...document.querySelectorAll('.swb')], logoBtns = [...document.querySelectorAll('[data-logo]')];
+  const colorBtns = [...document.querySelectorAll('.swb[data-base]')], logoBtns = [...document.querySelectorAll('[data-logo]')];
   const logo = { orsa: false };
   const color = { covetour: 'black', orsa: 'black' };
   const src = (b, c, l) => `door-3d/sticker-${b}${l ? '-logo' : ''}${c === 'black' ? '' : '-' + c}.webp?v=20261028b`;
@@ -315,6 +316,20 @@
       b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     });
   }
+  // Концепция 2, вариант 2: colour of the dark antiqua poster; swatches show only while it is selected
+  const k2dark = document.getElementById('k2dark'), k2sw = document.getElementById('k2sw');
+  const k2names = { black: 'чёрный', green: 'оливковый', wine: 'винный' };
+  for (const b of k2sw.querySelectorAll('button')) {
+    new Image().src = b.dataset.src;
+    b.addEventListener('click', () => {
+      k2dark.dataset.src = b.dataset.src;
+      k2dark.textContent = 'Антиква, ' + k2names[b.dataset.k2];
+      k2sw.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      k2sw.querySelector('.cname').textContent = b.title;
+      k2dark.click();
+    });
+  }
+  k2dark.parentNode.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { k2sw.hidden = b !== k2dark; }));
   // warm the cache so switching does not flash
   // tap a door to open it full screen; tap again, × or Esc to close
   const closeBtn = document.getElementById('fsClose');
