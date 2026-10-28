@@ -171,14 +171,14 @@
           </div>
           <div class="shade"></div>
         </div></div>
-        <figcaption>Вариант 1<span class="opts" role="group" aria-label="Цвет фото"><button type="button" data-img="k1" data-src="door-3d/sticker-keyhole.webp?v=20261028i" aria-pressed="true">Цвет</button><button type="button" data-img="k1" data-src="door-3d/sticker-keyhole-bw.webp?v=20261028l" aria-pressed="false">ЧБ</button></span></figcaption>
+        <figcaption>Вариант 1<span class="opts" role="group" aria-label="Цвет фото"><button type="button" data-img="k1" data-src="door-3d/sticker-keyhole.webp?v=20261028i" aria-pressed="true">Цвет</button><button type="button" data-img="k1" data-src="door-3d/sticker-keyhole-bw.webp?v=20261028m" aria-pressed="false">ЧБ</button></span></figcaption>
       </figure>
       <figure>
         <div class="frame"><div class="view" role="button" tabindex="0" aria-label="Открыть на весь экран">
           <div class="plate">
             <div class="ly" data-depth="0.35">
               <img class="leaf" src="door-3d/door.webp" alt="">
-              <img class="sticker" id="k2" src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" alt="Постер «Ждём вас» с фото в форме замочной скважины на стекле двери LEVUR">
+              <img class="sticker" id="k2" src="door-3d/sticker-poster-grotesk-light.webp?v=20261028m" alt="Постер «Ждём вас в гости в ноябре» с фото в форме замочной скважины на стекле двери LEVUR">
               <div class="sheen"></div>
             </div>
             <div class="ly" data-depth="1">
@@ -190,7 +190,7 @@
           </div>
           <div class="shade"></div>
         </div></div>
-        <figcaption>Вариант 2<span class="opts" role="group" aria-label="Вариант постера"><button type="button" id="k2dark" data-img="k2" data-src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" aria-pressed="true">Антиква, чёрный</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-grotesk.webp?v=20261028g" aria-pressed="false">Гротеск</button><button type="button" data-img="k2" data-src="door-3d/sticker-poster-serif.webp?v=20261028e" aria-pressed="false">Антиква</button></span><span class="swatches" id="k2sw" role="group" aria-label="Цвет фона"><button type="button" class="swb" data-k2="black" data-src="door-3d/sticker-poster-serif-dark.webp?v=20261028h" aria-pressed="true" title="Чёрный" aria-label="Чёрный"><span style="background:#262728"></span></button><button type="button" class="swb" data-k2="green" data-src="door-3d/sticker-poster-serif-dark-green.webp?v=20261028j" aria-pressed="false" title="Оливковый" aria-label="Оливковый"><span style="background:#3b422b"></span></button><button type="button" class="swb" data-k2="wine" data-src="door-3d/sticker-poster-serif-dark-wine.webp?v=20261028j" aria-pressed="false" title="Винный" aria-label="Винный"><span style="background:#512e31"></span></button><span class="cname">Чёрный</span></span></figcaption>
+        <figcaption>Вариант 2<span class="opts" role="group" aria-label="Шрифт"><button type="button" data-k2font="grotesk" aria-pressed="true">Гротеск</button><button type="button" data-k2font="serif" aria-pressed="false">Антиква</button></span><span class="swatches" id="k2sw" role="group" aria-label="Цвет фона"><button type="button" class="swb" data-k2c="light" aria-pressed="true" title="Светлый" aria-label="Светлый"><span style="background:#eeeae2"></span></button><button type="button" class="swb" data-k2c="black" aria-pressed="false" title="Чёрный" aria-label="Чёрный"><span style="background:#262728"></span></button><button type="button" class="swb" data-k2c="green" aria-pressed="false" title="Оливковый" aria-label="Оливковый"><span style="background:#3b422b"></span></button><button type="button" class="swb" data-k2c="wine" aria-pressed="false" title="Винный" aria-label="Винный"><span style="background:#512e31"></span></button><span class="cname">Светлый</span></span></figcaption>
       </figure>
     </div>
   </section>
@@ -309,27 +309,33 @@
   colorBtns.forEach(b => b.addEventListener('click', () => { color[b.dataset.base] = b.dataset.c; paint(); }));
   logoBtns.forEach(b => b.addEventListener('click', () => { logo[b.dataset.logo] = !logo[b.dataset.logo]; paint(); }));
   // simple image swaps (Концепция 2)
-  for (const b of document.querySelectorAll('.opts button')) {
+  for (const b of document.querySelectorAll('.opts button[data-img]')) {
     new Image().src = b.dataset.src;
     b.addEventListener('click', () => {
       document.getElementById(b.dataset.img).src = b.dataset.src;
       b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     });
   }
-  // Концепция 2, вариант 2: colour of the dark antiqua poster; swatches show only while it is selected
-  const k2dark = document.getElementById('k2dark'), k2sw = document.getElementById('k2sw');
-  const k2names = { black: 'чёрный', green: 'оливковый', wine: 'винный' };
-  for (const b of k2sw.querySelectorAll('button')) {
-    new Image().src = b.dataset.src;
-    b.addEventListener('click', () => {
-      k2dark.dataset.src = b.dataset.src;
-      k2dark.textContent = 'Антиква, ' + k2names[b.dataset.k2];
-      k2sw.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-      k2sw.querySelector('.cname').textContent = b.title;
-      k2dark.click();
-    });
+  // Концепция 2, вариант 2: font (grotesk / antiqua) and background fill, each font keeps its own fill
+  const k2 = document.getElementById('k2'), k2sw = document.getElementById('k2sw');
+  const k2fontBtns = [...document.querySelectorAll('[data-k2font]')], k2colBtns = [...k2sw.querySelectorAll('[data-k2c]')];
+  const K2 = {
+    grotesk: { light: 'door-3d/sticker-poster-grotesk-light.webp?v=20261028m', black: 'door-3d/sticker-poster-grotesk-black.webp?v=20261028m',
+               green: 'door-3d/sticker-poster-grotesk-green.webp?v=20261028m', wine: 'door-3d/sticker-poster-grotesk-wine.webp?v=20261028m' },
+    serif: { light: 'door-3d/sticker-poster-serif.webp?v=20261028e', black: 'door-3d/sticker-poster-serif-dark.webp?v=20261028h',
+             green: 'door-3d/sticker-poster-serif-dark-green.webp?v=20261028j', wine: 'door-3d/sticker-poster-serif-dark-wine.webp?v=20261028j' },
+  };
+  const k2st = { font: 'grotesk', color: { grotesk: 'light', serif: 'black' } };
+  function k2paint() {
+    const c = k2st.color[k2st.font];
+    k2.src = K2[k2st.font][c];
+    k2fontBtns.forEach(x => x.setAttribute('aria-pressed', String(x.dataset.k2font === k2st.font)));
+    k2colBtns.forEach(x => x.setAttribute('aria-pressed', String(x.dataset.k2c === c)));
+    k2sw.querySelector('.cname').textContent = k2colBtns.find(x => x.dataset.k2c === c).title;
   }
-  k2dark.parentNode.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { k2sw.hidden = b !== k2dark; }));
+  k2fontBtns.forEach(x => x.addEventListener('click', () => { k2st.font = x.dataset.k2font; k2paint(); }));
+  k2colBtns.forEach(x => x.addEventListener('click', () => { k2st.color[k2st.font] = x.dataset.k2c; k2paint(); }));
+  for (const f in K2) for (const c in K2[f]) new Image().src = K2[f][c];
   // warm the cache so switching does not flash
   // tap a door to open it full screen; tap again, × or Esc to close
   const closeBtn = document.getElementById('fsClose');
